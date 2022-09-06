@@ -71,6 +71,10 @@ def sort_by_year_month(tmp_dir: str, base_path: str) -> None:
                     move_photo(os.path.join(tmp_dir, file), -1, -1, base_path)
 
 
+def remove_tmp(tmp_dir: str) -> None:
+    os.rmdir(tmp_dir)
+
+
 def main(args):
     base_path, dir_paths = walk(args.path)
     tmp_dir = os.path.join(base_path, 'tmp')
@@ -78,6 +82,8 @@ def main(args):
     move_to_tmp(dir_paths, tmp_dir)
 
     sort_by_year_month(tmp_dir, base_path)
+
+    remove_tmp(tmp_dir)
 
 
 if __name__ == '__main__':
